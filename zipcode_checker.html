@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zip Code Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            margin: 10px 0;
+            width: 200px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .good {
+            color: green;
+        }
+
+        .bad {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Zip Code Checker</h1>
+    <input type="text" id="zipInput" placeholder="Enter Zip Code">
+    <button onclick="checkZip()">Check</button>
+
+    <div id="result"></div>
+
+    <script>
+        const allowedZips = ["65201", "65202", "65203", "65204"];
+
+        function checkZip() {
+            const zipInput = document.getElementById("zipInput");
+            const zip = zipInput.value.trim();
+            const result = document.getElementById("result");
+
+            const zipRegex = /^\d{5}(-\d{4})?$/;
+
+            if (!zipRegex.test(zip)) {
+                result.textContent = "Please enter a valid ZIP code.";
+                result.className = "bad";
+                return;
+            }
+
+            const zipToCheck = zip.split("-")[0];
+
+            if (allowedZips.includes(zipToCheck)) {
+                result.textContent = "You're good!";
+                result.className = "good";
+            } else {
+                result.textContent = "Nope, not covered";
+                result.className = "bad";
+            }
+        }
+
+        // Allow Enter key to submit
+        document.getElementById("zipInput").addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                checkZip();
+            }
+        });
+    </script>
+
+</body>
+</html>
