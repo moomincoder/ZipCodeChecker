@@ -85,10 +85,10 @@
             const zipToCheck = zip.split("-")[0];
 
             if (allowedZips.includes(zipToCheck)) {
-                result.textContent = "You're good!";
+                result.textContent = "Yes";
                 result.className = "good";
             } else {
-                result.textContent = "Nope, not covered";
+                result.textContent = "No";
                 result.className = "bad";
             }
         }
